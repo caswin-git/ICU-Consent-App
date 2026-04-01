@@ -2840,6 +2840,34 @@ function AdminPanel({ contentDB, contentOverrides, onSaveOverride, onClose }) {
                         <p className="text-xs text-gray-400" style={{ fontFamily: "'Noto Sans Tamil', sans-serif" }}>{cond.keyword.ta}</p>
                       </button>
                     ))}
+                    <button
+                      onClick={() => {
+                        const newId = `cond_${Date.now()}`;
+                        const newCond = {
+                          id: newId,
+                          keyword: { en: "New Condition", ta: "புதிய நிலை" },
+                          active: true,
+                          severity: {
+                            mild:     { en: "", ta: "" },
+                            moderate: { en: "", ta: "" },
+                            severe:   { en: "", ta: "" },
+                            critical: { en: "", ta: "" },
+                          },
+                          trajectory: {
+                            improving:  { en: "", ta: "" },
+                            status_quo: { en: "", ta: "" },
+                            worsening:  { en: "", ta: "" },
+                            failing:    { en: "", ta: "" },
+                          },
+                        };
+                        module.conditions.push(newCond);
+                        setEditTarget({ moduleId: module.id, condId: newId });
+                        setView("editor");
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 border-dashed transition-all mt-1"
+                    >
+                      <p className="text-xs font-semibold text-blue-600">+ Add New Condition to {module.label.en}</p>
+                    </button>
                   </div>
                 </div>
               </Card>
